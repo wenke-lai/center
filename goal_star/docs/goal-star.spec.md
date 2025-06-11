@@ -26,5 +26,28 @@ OAuth 登入支援 - 支援 Google 和 GitHub 登入
 
 ### 必備條件
 
-0. 對外提供 APIs（前端使用）以及 admin pages (管理員處理)
-1. 所有功能皆放置於 `/goal_star` app 中
+0. 對外提供 APIs（前端使用）以及 admin pages (管理員處理)。
+1. 所有功能皆放置於 `/goal_star` app 中。
+2. 所有外來鍵都放在其他 fields 下方，並且中間空一行。
+
+### 實作細節
+
+#### Model
+
+`nullable = {default=None, null=True, blank=True}`
+use `from django.utils.translation import gettext_lazy` for TextChoices
+
+- Goal model
+
+  - fields
+    - name
+    - description (nullable)
+    - created_at
+    - deadline (default=timezone.now + 30d)
+    - user (FK, needs related name)
+    - state
+      - TextChoies: 進行中、等待驗證、完成、驗證超時
+  - order by deadline
+
+- Goal Admin page
+  - do not search by user name
