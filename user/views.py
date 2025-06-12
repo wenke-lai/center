@@ -1,4 +1,5 @@
 import logging
+from typing import Literal
 
 from ninja import Router, Schema
 from ninja.errors import AuthenticationError
@@ -8,11 +9,11 @@ from .models import User
 
 logger = logging.getLogger(__name__)
 
-router = Router()
+router = Router(tags=["user"])
 
 
 class OnboardingSchema(Schema):
-    appName: str
+    appName: Literal["goalStar"]
 
 
 @router.post("/onboarding")
