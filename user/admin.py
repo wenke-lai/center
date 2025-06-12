@@ -12,11 +12,10 @@ class UserAdmin(UserAdmin):
         "is_active",
         "is_staff",
         "is_superuser",
-        "clerk_id",
     )
 
     fieldsets = (
-        ("Personal info", {"fields": ("first_name", "last_name", "email", "clerk_id")}),
+        ("Personal info", {"fields": ("first_name", "last_name", "email")}),
         (
             "Permissions",
             {
